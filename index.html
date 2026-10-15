@@ -12,184 +12,244 @@
 }
 
 body {
+    margin: 0;
+    padding: 16px;
     font-family: Arial, sans-serif;
     background: #f1f5f9;
-    margin: 0;
-    padding: 15px;
-    color: #222;
+    color: #1e293b;
 }
 
 .container {
-    max-width: 650px;
-    margin: auto;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 22px;
     background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 3px 12px #00000015;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 h1 {
     text-align: center;
     color: #4f46e5;
+    margin-top: 5px;
 }
 
 h2 {
     color: #4338ca;
-    font-size: 19px;
-    margin-top: 25px;
+    font-size: 20px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
 }
 
 label {
     display: block;
-    margin-top: 13px;
     font-weight: bold;
+    margin-top: 15px;
 }
 
-input, select, button {
+input, select {
+    display: block;
     width: 100%;
     padding: 12px;
     margin-top: 7px;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
-    font-size: 15px;
+    background: white;
+    font-size: 16px;
 }
 
 button {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 8px;
     background: #4f46e5;
     color: white;
-    border: none;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 18px;
 }
 
 button:hover {
     background: #3730a3;
 }
 
-.summary {
-    background: #eef2ff;
-    padding: 12px;
-    border-radius: 10px;
-    margin-top: 20px;
+#foodSection {
+    display: none;
+    margin-top: 25px;
 }
 
-.entry {
+.summary {
+    margin-top: 25px;
+    padding: 16px;
+    background: #eef2ff;
+    border-radius: 10px;
+}
+
+.count-row {
+    padding: 8px 0;
+    border-bottom: 1px solid #dbeafe;
+}
+
+.student-card {
+    margin-top: 12px;
+    padding: 14px;
     background: #f8fafc;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 10px;
     border-left: 4px solid #6366f1;
+    border-radius: 8px;
     overflow-wrap: anywhere;
 }
 
-.small-button {
-    background: #dc2626;
-    padding: 8px;
-    margin-top: 8px;
+.student-card p {
+    margin: 6px 0;
+    line-height: 1.5;
 }
 
-.note {
+.delete-button {
+    background: #dc2626;
+    padding: 9px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.secondary-button {
+    background: #64748b;
+}
+
+.notice {
+    margin-top: 22px;
     font-size: 13px;
+    line-height: 1.6;
     color: #64748b;
-    line-height: 1.5;
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
-<h1>🏠 Hostel Food Count</h1>
-<p style="text-align:center;">Select your room and enter your details</p>
+    <h1>🏠 Hostel Food Count</h1>
+    <p class="subtitle">Select your room and submit your daily food choices.</p>
 
-<label>Select Room</label>
-<select id="room">
-    <option value="">Choose your room</option>
-    <option value="Room 1">Room 1</option>
-    <option value="Room 2">Room 2</option>
-    <option value="Room 3">Room 3</option>
-    <option value="Room 4">Room 4</option>
-    <option value="Room 5">Room 5</option>
-    <option value="Room 6">Room 6</option>
-</select>
+    <div id="loginSection">
 
-<label>Room Code</label>
-<input type="password" id="roomCode" placeholder="Enter room code">
+        <label for="room">Select Room</label>
+        <select id="room">
+            <option value="">-- Choose Room --</option>
+            <option value="Room 1">Room 1</option>
+            <option value="Room 2">Room 2</option>
+            <option value="Room 3">Room 3</option>
+            <option value="Room 4">Room 4</option>
+            <option value="Room 5">Room 5</option>
+            <option value="Room 6">Room 6</option>
+        </select>
 
-<button onclick="enterRoom()">Enter Room</button>
+        <label for="roomCode">Room Code</label>
+        <input
+            type="password"
+            id="roomCode"
+            placeholder="Enter your room code"
+            autocomplete="off"
+        >
 
-<div id="foodSection" style="display:none;">
+        <button type="button" id="enterBtn">Enter Room</button>
 
-<h2 id="roomTitle"></h2>
+    </div>
 
-<label>Student Name</label>
-<input type="text" id="studentName" placeholder="Enter your name">
+    <div id="foodSection">
 
-<label>Breakfast</label>
-<select id="breakfast">
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-</select>
+        <h2 id="roomTitle"></h2>
 
-<label>Morning Tea</label>
-<select id="morningTea">
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-</select>
+        <form id="foodForm">
 
-<label>Lunch</label>
-<select id="lunch">
-    <option value="Dining Hall">Dining Hall</option>
-    <option value="Tiffin Box">Tiffin Box</option>
-    <option value="No Lunch">No Lunch</option>
-</select>
+            <label for="studentName">Student Name</label>
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter your name"
+                required
+            >
 
-<label>Evening Snacks</label>
-<select id="snacks">
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-</select>
+            <label for="breakfast">Breakfast</label>
+            <select id="breakfast">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
 
-<label>Evening Tea</label>
-<select id="eveningTea">
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-</select>
+            <label for="morningTea">Morning Tea</label>
+            <select id="morningTea">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
 
-<label>Dinner</label>
-<select id="dinner">
-    <option value="Veg">Veg</option>
-    <option value="Non-veg">Non-veg</option>
-    <option value="No Dinner">No Dinner</option>
-</select>
+            <label for="lunch">Lunch</label>
+            <select id="lunch">
+                <option value="Dining Hall">Dining Hall</option>
+                <option value="Tiffin Box">Tiffin Box</option>
+                <option value="No Lunch">No Lunch</option>
+            </select>
 
-<label>Sweet</label>
-<select id="sweet">
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-</select>
+            <label for="snacks">Evening Snacks</label>
+            <select id="snacks">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
 
-<button onclick="saveEntry()">Submit Food Details</button>
+            <label for="eveningTea">Evening Tea</label>
+            <select id="eveningTea">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
 
-<div class="summary">
-    <h2>📊 Food Summary</h2>
-    <div id="counts"></div>
-</div>
+            <label for="dinner">Dinner</label>
+            <select id="dinner">
+                <option value="Veg">Veg</option>
+                <option value="Non-veg">Non-veg</option>
+                <option value="No Dinner">No Dinner</option>
+            </select>
 
-<h2>👥 Students in This Room</h2>
-<div id="entries"></div>
+            <label for="sweet">Sweet</label>
+            <select id="sweet">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
 
-<p class="note">
-    Demo version: entries are stored only in this browser.
-    They are automatically removed after 24 hours when this page is opened.
-</p>
+            <button type="submit">Save Food Details</button>
 
-</div>
+        </form>
+
+        <div class="summary">
+            <h2>📊 Food Summary</h2>
+            <div id="counts"></div>
+        </div>
+
+        <h2>👥 Students in This Room</h2>
+        <div id="entries"></div>
+
+        <button type="button" id="logoutBtn" class="secondary-button">
+            Leave Room
+        </button>
+
+    </div>
+
+    <p class="notice">
+        Demo only: data is stored in this browser. Entries expire after
+        24 hours when the page is opened or refreshed. This does not
+        synchronize entries between different phones.
+    </p>
+
 </div>
 
 <script>
-// Demo room codes. Change these before using the demo.
+"use strict";
+
+// DEMO CODES — these are not secure authentication.
 const roomCodes = {
     "Room 1": "ROOM101",
     "Room 2": "ROOM202",
@@ -197,164 +257,4 @@ const roomCodes = {
     "Room 4": "ROOM404",
     "Room 5": "ROOM505",
     "Room 6": "ROOM606"
-};
 
-let currentRoom = "";
-
-function getEntries() {
-    try {
-        return JSON.parse(localStorage.getItem("hostelFoodEntries") || "[]");
-    } catch (error) {
-        return [];
-    }
-}
-
-function setEntries(entries) {
-    localStorage.setItem("hostelFoodEntries", JSON.stringify(entries));
-}
-
-function removeExpiredEntries() {
-    const cutoff = Date.now() - 24 * 60 * 60 * 1000;
-    setEntries(getEntries().filter(entry => entry.timestamp > cutoff));
-}
-
-function enterRoom() {
-    const room = document.getElementById("room").value;
-    const code = document.getElementById("roomCode").value;
-
-    if (!room) {
-        alert("Please select your room.");
-        return;
-    }
-
-    if (code !== roomCodes[room]) {
-        alert("Incorrect room code!");
-        return;
-    }
-
-    currentRoom = room;
-    document.getElementById("foodSection").style.display = "block";
-    document.getElementById("roomTitle").textContent = "🍽️ " + room;
-    renderEntries();
-}
-
-function saveEntry() {
-    const name = document.getElementById("studentName").value.trim();
-
-    if (!name) {
-        alert("Please enter your name.");
-        return;
-    }
-
-    const entries = getEntries();
-
-    // One entry per student name in each room.
-    const existingIndex = entries.findIndex(entry =>
-        entry.room === currentRoom &&
-        entry.name.toLowerCase() === name.toLowerCase()
-    );
-
-    const newEntry = {
-        room: currentRoom,
-        name: name,
-        breakfast: document.getElementById("breakfast").value,
-        morningTea: document.getElementById("morningTea").value,
-        lunch: document.getElementById("lunch").value,
-        snacks: document.getElementById("snacks").value,
-        eveningTea: document.getElementById("eveningTea").value,
-        dinner: document.getElementById("dinner").value,
-        sweet: document.getElementById("sweet").value,
-        timestamp: Date.now()
-    };
-
-    if (existingIndex >= 0) {
-        entries[existingIndex] = newEntry;
-    } else {
-        entries.push(newEntry);
-    }
-
-    setEntries(entries);
-    document.getElementById("studentName").value = "";
-    renderEntries();
-    alert("Food details saved!");
-}
-
-function renderEntries() {
-    removeExpiredEntries();
-
-    const entries = getEntries().filter(entry => entry.room === currentRoom);
-    const entriesDiv = document.getElementById("entries");
-
-    entriesDiv.innerHTML = "";
-
-    if (entries.length === 0) {
-        entriesDiv.textContent = "No students have submitted their food choices yet.";
-    }
-
-    entries.forEach(entry => {
-        const card = document.createElement("div");
-        card.className = "entry";
-
-        const details = document.createElement("div");
-        details.textContent =
-            entry.name +
-            " — Breakfast: " + entry.breakfast +
-            " | Morning tea: " + entry.morningTea +
-            " | Lunch: " + entry.lunch +
-            " | Snacks: " + entry.snacks +
-            " | Evening tea: " + entry.eveningTea +
-            " | Dinner: " + entry.dinner +
-            " | Sweet: " + entry.sweet;
-
-        const removeButton = document.createElement("button");
-        removeButton.className = "small-button";
-        removeButton.textContent = "Delete Entry";
-        removeButton.onclick = function () {
-            if (confirm("Delete this entry?")) {
-                setEntries(getEntries().filter(item =>
-                    !(item.room === currentRoom &&
-                      item.name === entry.name)
-                ));
-                renderEntries();
-            }
-        };
-
-        card.appendChild(details);
-        card.appendChild(removeButton);
-        entriesDiv.appendChild(card);
-    });
-
-    const count = {
-        students: entries.length,
-        breakfast: 0,
-        morningTea: 0,
-        diningHall: 0,
-        tiffinBox: 0,
-        snacks: 0,
-        eveningTea: 0,
-        veg: 0,
-        nonveg: 0,
-        sweet: 0
-    };
-
-    entries.forEach(entry => {
-        if (entry.breakfast === "Yes") count.breakfast++;
-        if (entry.morningTea === "Yes") count.morningTea++;
-        if (entry.lunch === "Dining Hall") count.diningHall++;
-        if (entry.lunch === "Tiffin Box") count.tiffinBox++;
-        if (entry.snacks === "Yes") count.snacks++;
-        if (entry.eveningTea === "Yes") count.eveningTea++;
-        if (entry.dinner === "Veg") count.veg++;
-        if (entry.dinner === "Non-veg") count.nonveg++;
-        if (entry.sweet === "Yes") count.sweet++;
-    });
-
-    document.getElementById("counts").textContent =
-        "Total students: " + count.students +
-        " | Breakfast: " + count.breakfast +
-        " | Morning tea: " + count.morningTea +
-        " | Dining Hall lunch: " + count.diningHall +
-        " | Tiffin Box: " + count.tiffinBox +
-        " | Evening snacks: " + count.snacks +
-        " | Evening tea: " + count.eveningTea +
-        "
