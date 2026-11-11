@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +7,7 @@
 <title>Hostel Food Count</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -28,21 +26,9 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-h1 {
-    text-align: center;
-    color: #4f46e5;
-    margin-top: 5px;
-}
-
-h2 {
-    color: #4338ca;
-    font-size: 20px;
-}
-
-.subtitle {
-    text-align: center;
-    color: #64748b;
-}
+h1 { text-align: center; color: #4f46e5; }
+h2 { color: #4338ca; font-size: 20px; }
+.subtitle { text-align: center; color: #64748b; }
 
 label {
     display: block;
@@ -75,14 +61,9 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background: #3730a3;
-}
+button:hover { background: #3730a3; }
 
-#foodSection {
-    display: none;
-    margin-top: 25px;
-}
+#foodSection { display: none; margin-top: 25px; }
 
 .summary {
     margin-top: 25px;
@@ -105,10 +86,7 @@ button:hover {
     overflow-wrap: anywhere;
 }
 
-.student-card p {
-    margin: 6px 0;
-    line-height: 1.5;
-}
+.student-card p { margin: 6px 0; line-height: 1.5; }
 
 .delete-button {
     background: #dc2626;
@@ -117,9 +95,7 @@ button:hover {
     margin-top: 10px;
 }
 
-.secondary-button {
-    background: #64748b;
-}
+.secondary-button { background: #64748b; }
 
 .notice {
     margin-top: 22px;
@@ -134,122 +110,110 @@ button:hover {
 
 <div class="container">
 
-    <h1>🏠 Hostel Food Count</h1>
-    <p class="subtitle">Select your room and submit your daily food choices.</p>
+<h1>🏠 Hostel Food Count</h1>
+<p class="subtitle">Select your room and submit your daily food choices.</p>
 
-    <div id="loginSection">
+<div id="loginSection">
 
-        <label for="room">Select Room</label>
-        <select id="room">
-            <option value="">-- Choose Room --</option>
-            <option value="Room 1">Room 1</option>
-            <option value="Room 2">Room 2</option>
-            <option value="Room 3">Room 3</option>
-            <option value="Room 4">Room 4</option>
-            <option value="Room 5">Room 5</option>
-            <option value="Room 6">Room 6</option>
+    <label for="room">Select Room</label>
+    <select id="room">
+        <option value="">-- Choose Room --</option>
+        <option>Room 1</option>
+        <option>Room 2</option>
+        <option>Room 3</option>
+        <option>Room 4</option>
+        <option>Room 5</option>
+        <option>Room 6</option>
+    </select>
+
+    <label for="roomCode">Room Code</label>
+    <input type="password" id="roomCode"
+    placeholder="Enter your room code" autocomplete="off">
+
+    <button type="button" id="enterBtn">Enter Room</button>
+</div>
+
+<div id="foodSection">
+
+    <h2 id="roomTitle"></h2>
+
+    <form id="foodForm">
+
+        <label for="studentName">Student Name</label>
+        <input type="text" id="studentName"
+        placeholder="Enter your name" required>
+
+        <label for="breakfast">Breakfast</label>
+        <select id="breakfast">
+            <option>Yes</option>
+            <option>No</option>
         </select>
 
-        <label for="roomCode">Room Code</label>
-        <input
-            type="password"
-            id="roomCode"
-            placeholder="Enter your room code"
-            autocomplete="off"
-        >
+        <label for="morningTea">Morning Tea</label>
+        <select id="morningTea">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
 
-        <button type="button" id="enterBtn">Enter Room</button>
+        <label for="lunch">Lunch</label>
+        <select id="lunch">
+            <option>Dining Hall</option>
+            <option>Tiffin Box</option>
+            <option>No Lunch</option>
+        </select>
 
+        <label for="snacks">Evening Snacks</label>
+        <select id="snacks">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <label for="eveningTea">Evening Tea</label>
+        <select id="eveningTea">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <label for="dinner">Dinner</label>
+        <select id="dinner">
+            <option>Veg</option>
+            <option>Non-veg</option>
+            <option>No Dinner</option>
+        </select>
+
+        <label for="sweet">Sweet</label>
+        <select id="sweet">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <button type="submit">Save Food Details</button>
+    </form>
+
+    <div class="summary">
+        <h2>📊 Food Summary</h2>
+        <div id="counts"></div>
     </div>
 
-    <div id="foodSection">
+    <h2>👥 Students in This Room</h2>
+    <div id="entries"></div>
 
-        <h2 id="roomTitle"></h2>
+    <button type="button" id="logoutBtn"
+    class="secondary-button">Leave Room</button>
 
-        <form id="foodForm">
+</div>
 
-            <label for="studentName">Student Name</label>
-            <input
-                type="text"
-                id="studentName"
-                placeholder="Enter your name"
-                required
-            >
-
-            <label for="breakfast">Breakfast</label>
-            <select id="breakfast">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-
-            <label for="morningTea">Morning Tea</label>
-            <select id="morningTea">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-
-            <label for="lunch">Lunch</label>
-            <select id="lunch">
-                <option value="Dining Hall">Dining Hall</option>
-                <option value="Tiffin Box">Tiffin Box</option>
-                <option value="No Lunch">No Lunch</option>
-            </select>
-
-            <label for="snacks">Evening Snacks</label>
-            <select id="snacks">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-
-            <label for="eveningTea">Evening Tea</label>
-            <select id="eveningTea">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-
-            <label for="dinner">Dinner</label>
-            <select id="dinner">
-                <option value="Veg">Veg</option>
-                <option value="Non-veg">Non-veg</option>
-                <option value="No Dinner">No Dinner</option>
-            </select>
-
-            <label for="sweet">Sweet</label>
-            <select id="sweet">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-
-            <button type="submit">Save Food Details</button>
-
-        </form>
-
-        <div class="summary">
-            <h2>📊 Food Summary</h2>
-            <div id="counts"></div>
-        </div>
-
-        <h2>👥 Students in This Room</h2>
-        <div id="entries"></div>
-
-        <button type="button" id="logoutBtn" class="secondary-button">
-            Leave Room
-        </button>
-
-    </div>
-
-    <p class="notice">
-        Demo only: data is stored in this browser. Entries expire after
-        24 hours when the page is opened or refreshed. This does not
-        synchronize entries between different phones.
-    </p>
+<p class="notice">
+Demo only: Data is stored in this browser. Entries expire after
+24 hours. This version does not synchronize data between phones.
+</p>
 
 </div>
 
 <script>
 "use strict";
 
-// DEMO CODES — these are not secure authentication.
+// Room codes
 const roomCodes = {
     "Room 1": "ROOM101",
     "Room 2": "ROOM202",
@@ -257,4 +221,260 @@ const roomCodes = {
     "Room 4": "ROOM404",
     "Room 5": "ROOM505",
     "Room 6": "ROOM606"
+};
+
+const room = document.getElementById("room");
+const roomCode = document.getElementById("roomCode");
+const enterBtn = document.getElementById("enterBtn");
+const loginSection = document.getElementById("loginSection");
+const foodSection = document.getElementById("foodSection");
+const foodForm = document.getElementById("foodForm");
+
+let currentRoom = "";
+
+// Get room data
+function getData() {
+    const key = "food_" + currentRoom;
+    let data = JSON.parse(localStorage.getItem(key) || "[]");
+
+    const now = Date.now();
+
+    data = data.filter(item =>
+        now - item.time < 24 * 60 * 60 * 1000
+    );
+
+    localStorage.setItem(key, JSON.stringify(data));
+
+    return data;
+}
+
+// Save room data
+function saveData(data) {
+    localStorage.setItem(
+        "food_" + currentRoom,
+        JSON.stringify(data)
+    );
+}
+
+// Enter Room button
+enterBtn.addEventListener("click", function() {
+
+    const selectedRoom = room.value;
+    const enteredCode = roomCode.value.trim();
+
+    if (!selectedRoom) {
+        alert("Please select your room!");
+        return;
+    }
+
+    if (!enteredCode) {
+        alert("Please enter your room code!");
+        return;
+    }
+
+    if (roomCodes[selectedRoom] !== enteredCode) {
+        alert("Incorrect room code! Please try again.");
+        return;
+    }
+
+    currentRoom = selectedRoom;
+
+    loginSection.style.display = "none";
+    foodSection.style.display = "block";
+
+    document.getElementById("roomTitle").textContent =
+        "Welcome to " + currentRoom;
+
+    showData();
+});
+
+// Save Food Details
+foodForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("studentName").value.trim();
+
+    if (!name) {
+        alert("Please enter your name!");
+        return;
+    }
+
+    let data = getData();
+
+    const student = {
+        name: name,
+        breakfast: document.getElementById("breakfast").value,
+        morningTea: document.getElementById("morningTea").value,
+        lunch: document.getElementById("lunch").value,
+        snacks: document.getElementById("snacks").value,
+        eveningTea: document.getElementById("eveningTea").value,
+        dinner: document.getElementById("dinner").value,
+        sweet: document.getElementById("sweet").value,
+        time: Date.now()
+    };
+
+    // Update existing student's entry
+    const index = data.findIndex(item =>
+        item.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (index !== -1) {
+        data[index] = student;
+    } else {
+        data.push(student);
+    }
+
+    saveData(data);
+
+    alert("Food details saved successfully!");
+
+    foodForm.reset();
+    showData();
+});
+
+// Display students and food count
+function showData() {
+
+    const data = getData();
+
+    const entries = document.getElementById("entries");
+    const counts = document.getElementById("counts");
+
+    entries.innerHTML = "";
+    counts.innerHTML = "";
+
+    const summary = {
+        breakfast: 0,
+        morningTea: 0,
+        dining: 0,
+        tiffin: 0,
+        snacks: 0,
+        eveningTea: 0,
+        veg: 0,
+        nonveg: 0,
+        sweet: 0
+    };
+
+    data.forEach((student, index) => {
+
+        if (student.breakfast === "Yes") summary.breakfast++;
+        if (student.morningTea === "Yes") summary.morningTea++;
+
+        if (student.lunch === "Dining Hall") summary.dining++;
+        if (student.lunch === "Tiffin Box") summary.tiffin++;
+
+        if (student.snacks === "Yes") summary.snacks++;
+        if (student.eveningTea === "Yes") summary.eveningTea++;
+
+        if (student.dinner === "Veg") summary.veg++;
+        if (student.dinner === "Non-veg") summary.nonveg++;
+
+        if (student.sweet === "Yes") summary.sweet++;
+
+        const card = document.createElement("div");
+        card.className = "student-card";
+
+        const details = [
+            ["Name", student.name],
+            ["Breakfast", student.breakfast],
+            ["Morning Tea", student.morningTea],
+            ["Lunch", student.lunch],
+            ["Evening Snacks", student.snacks],
+            ["Evening Tea", student.eveningTea],
+            ["Dinner", student.dinner],
+            ["Sweet", student.sweet]
+        ];
+
+        details.forEach(([label, value]) => {
+            const p = document.createElement("p");
+            p.textContent = label + ": " + value;
+            card.appendChild(p);
+        });
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete Entry";
+        deleteBtn.className = "delete-button";
+        deleteBtn.type = "button";
+
+        deleteBtn.addEventListener("click", function() {
+            deleteEntry(index);
+        });
+
+        card.appendChild(deleteBtn);
+        entries.appendChild(card);
+    });
+
+    const rows = [
+        ["Total Students", data.length],
+        ["Breakfast", summary.breakfast],
+        ["Morning Tea", summary.morningTea],
+        ["Dining Hall Lunch", summary.dining],
+        ["Tiffin Box", summary.tiffin],
+        ["Evening Snacks", summary.snacks],
+        ["Evening Tea", summary.eveningTea],
+        ["Veg Dinner", summary.veg],
+        ["Non-veg Dinner", summary.nonveg],
+        ["Sweet", summary.sweet]
+    ];
+
+    rows.forEach(([label, value]) => {
+        const row = document.createElement("div");
+        row.className = "count-row";
+        row.textContent = label + ": " + value;
+        counts.appendChild(row);
+    });
+
+    if (data.length === 0) {
+        entries.textContent = "No students have submitted yet.";
+    }
+}
+
+// Delete student entry
+function deleteEntry(index) {
+
+    if (!confirm("Are you sure you want to delete this entry?")) {
+        return;
+    }
+
+    let data = getData();
+    data.splice(index, 1);
+
+    saveData(data);
+    showData();
+}
+
+// Leave Room button
+document.getElementById("logoutBtn").addEventListener("click", function() {
+
+    currentRoom = "";
+
+    room.value = "";
+    roomCode.value = "";
+
+    foodForm.reset();
+
+    foodSection.style.display = "none";
+    loginSection.style.display = "block";
+
+});
+
+// Clean expired entries when page opens
+Object.keys(roomCodes).forEach(roomName => {
+
+    const key = "food_" + roomName;
+    let data = JSON.parse(localStorage.getItem(key) || "[]");
+
+    data = data.filter(item =>
+        Date.now() - item.time < 24 * 60 * 60 * 1000
+    );
+
+    localStorage.setItem(key, JSON.stringify(data));
+
+});
+
+</script>
+
+</body>
+</html>
 
